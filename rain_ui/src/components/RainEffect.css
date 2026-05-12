@@ -1,0 +1,9 @@
+.rain-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Crucial: allows clicking through to map and UI */
+  z-index: 500; /* Put it above the map layer but behind some UI panels if needed. Leaflet map defaults are lower. User panels usually have z-index > 1000 */
+}

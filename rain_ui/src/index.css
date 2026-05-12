@@ -1,0 +1,161 @@
+:root {
+  --primary-bg: #0b1120; /* Darker blue for astronomical/meteorological feel */
+  --panel-bg: rgba(15, 23, 42, 0.65);
+  --accent-color: #38bdf8;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-glass: rgba(56, 189, 248, 0.2);
+  --glass-blur: blur(16px);
+  --glow-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  background-color: var(--primary-bg);
+  color: var(--text-main);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+#root {
+  height: 100%;
+}
+
+.glass-panel {
+  background: var(--panel-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(56, 189, 248, 0.05);
+  border-radius: 16px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+  color: #0b1120;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: var(--glow-shadow);
+}
+
+/* Leaflet Overrides */
+.leaflet-container {
+  height: 100vh !important;
+  width: 100vw !important;
+  background: var(--primary-bg) !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: var(--panel-bg) !important;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  color: var(--text-main) !important;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: 16px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), inset 0 0 25px rgba(56, 189, 248, 0.1) !important;
+  padding: 0 !important;
+}
+
+.leaflet-popup-tip-container {
+  display: none !important; /* Remove the triangle tip for a cleaner floating card look */
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  width: auto !important;
+}
+
+.leaflet-popup-close-button {
+  color: #94a3b8 !important;
+  padding: 8px !important;
+}
+
+.leaflet-popup-close-button:hover {
+  color: #38bdf8 !important;
+}
+
+/* Glowing Neon City Marker */
+.glowing-marker {
+  width: 16px;
+  height: 16px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  box-shadow: 0 0 15px 5px rgba(239, 68, 68, 0.7);
+  animation: marker-pulse 2s infinite ease-in-out;
+  border: 1px solid #fff;
+}
+
+@keyframes marker-pulse {
+  0% {
+    box-shadow: 0 0 10px 2px rgba(239, 68, 68, 0.5), 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 8px rgba(239, 68, 68, 0.8), 0 0 0 15px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 10px 2px rgba(239, 68, 68, 0.5), 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+.glowing-circle {
+  animation: pulse 3s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.3; }
+  50% { transform: scale(1.05); opacity: 0.6; }
+  100% { transform: scale(0.95); opacity: 0.3; }
+}
+
+.weather-icon {
+  width: 64px;
+  height: 64px;
+  filter: drop-shadow(0 0 12px var(--accent-color));
+}
+
+/* Rain Canvas */
+.rain-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Let clicks pass through to the map */
+  z-index: 500; /* Above map but below UI */
+}
+
+/* Custom Scrollbar for suggestions */
+.suggestions-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+.suggestions-dropdown::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+.suggestions-dropdown::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.5);
+  border-radius: 10px;
+}
+.suggestions-dropdown::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.8);
+}
